@@ -1,0 +1,8 @@
+D:\C#\MatrixCalculator\obj\Debug\MatrixCalculator.csproj.AssemblyReference.cache
+D:\C#\MatrixCalculator\obj\Debug\MatrixCalculator.csproj.SuggestedBindingRedirects.cache
+D:\C#\MatrixCalculator\obj\Debug\MatrixCalculator.csproj.CoreCompileInputs.cache
+D:\C#\MatrixCalculator\bin\Debug\MatrixCalculator.exe.config
+D:\C#\MatrixCalculator\bin\Debug\MatrixCalculator.exe
+D:\C#\MatrixCalculator\bin\Debug\MatrixCalculator.pdb
+D:\C#\MatrixCalculator\obj\Debug\MatrixCalculator.exe
+D:\C#\MatrixCalculator\obj\Debug\MatrixCalculator.pdb
