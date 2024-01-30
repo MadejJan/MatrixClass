@@ -1,97 +1,152 @@
 ﻿using System;
-using System.Data.SqlClient;
 
-namespace MatrixOperator
+class Program
 {
-
-    class Program
+    static void Main()
     {
-        static void Main()
+        Console.WriteLine("Welcome to the Matrix Interface");
+
+        // Get dimensions for the first matrix
+        int rows1 = Validation("rows");
+        int columns1 = Validation("columns");
+
+        // Create and fill the first matrix
+        Matrix matrix1 = new Matrix(rows1, columns1);
+        Console.WriteLine("Fill the first matrix:");
+        matrix1.MatrixFieldsFiller();
+
+        // Display the first matrix
+        Console.WriteLine("First Matrix:");
+        matrix1.ShowInConsole();
+
+        // Choose operation
+        Console.WriteLine("Choose operation:");
+        Console.WriteLine("1. Addition");
+        Console.WriteLine("2. Subtraction");
+        Console.WriteLine("3. Multiplication");
+        Console.WriteLine("4. Transpose");
+        Console.WriteLine("5. Determinant");
+        Console.WriteLine("Enter the corresponding number for the operation:");
+
+        int choice = Convert.ToInt32(Console.ReadLine());
+
+        switch (choice)
         {
-         
-           
+            case 1:
+                // Get dimensions for the second matrix
+                int rows2 = Validation("rows");
+                int columns2 = Validation("columns");
 
+                // Create and fill the second matrix
+                Matrix matrix2 = new Matrix(rows2, columns2);
+                Console.WriteLine("Fill the second matrix:");
+                matrix2.MatrixFieldsFiller();
 
-            //1st dimmensions
-            Console.WriteLine("Enter the dimensions of the first matrix (n x m):");
-            Console.Write("Rows: ");
-            int rows1 = Validation("Rows");
+                // Display the second matrix
+                Console.WriteLine("Second Matrix:");
+                matrix2.ShowInConsole();
 
-            Console.Write("Columns: ");
-            int columns1 = Validation("Columns");
-            //2nd dimensions
-            Console.WriteLine("Enter the dimensions of the second matrix (n x m):");
-            Console.Write("Rows: ");
-            int rows2 = Validation("Rows");
-            Console.Write("Columns: ");
-            int columns2 = Validation("Columns");
+                // Perform addition
+                Matrix additionResult = Matrix.Addition(matrix1, matrix2);
 
+                // Display result
+                Console.WriteLine("Result of Addition:");
+                additionResult.ShowInConsole();
+                break;
 
-            Matrix firstMatrix = new Matrix(rows1, columns1);
+            case 2:
+                // Get dimensions for the second matrix
+                int rowsSub = Validation("rows");
+                int columnsSub = Validation("columns");
 
-            // 1st Matrix Values
-            Console.WriteLine("Enter values for the first matrix:");
-            firstMatrix.MatrixFieldsFiller();
+                // Create and fill the second matrix
+                Matrix matrixSub = new Matrix(rowsSub, columnsSub);
+                Console.WriteLine("Fill the second matrix:");
+                matrixSub.MatrixFieldsFiller();
 
+                // Display the second matrix
+                Console.WriteLine("Second Matrix:");
+                matrixSub.ShowInConsole();
 
+                // Perform subtraction
+                Matrix subtractionResult = Matrix.Substraction(matrix1, matrixSub);
 
-            Matrix secondMatrix = new Matrix(rows2, columns2);
+                // Display result
+                Console.WriteLine("Result of Subtraction:");
+                subtractionResult.ShowInConsole();
+                break;
 
-            // 2nd Matrix Values
-            Console.WriteLine("Enter values for the second matrix:");
-            secondMatrix.MatrixFieldsFiller();
+            case 3:
+                // Get dimensions for the second matrix
+                int rowsMul = Validation("rows");
+                int columnsMul = Validation("columns");
 
+                // Create and fill the second matrix
+                Matrix matrixMul = new Matrix(rowsMul, columnsMul);
+                Console.WriteLine("Fill the second matrix:");
+                matrixMul.MatrixFieldsFiller();
 
-            //Display
-            Console.WriteLine("\nMatrix 1:");
-            firstMatrix.ShowInConsole();
-            Console.WriteLine("\nMatrix 2:");
-            secondMatrix.ShowInConsole();
-            Matrix sum = Matrix.Addition(firstMatrix, secondMatrix);
-            Matrix substraction = Matrix.Substraction(firstMatrix, secondMatrix);
-            Matrix multiplication = Matrix.Multiplication(firstMatrix, secondMatrix);
-            Matrix firstTransposed = firstMatrix.Transpose();
-            Matrix secondTransposed = secondMatrix.Transpose();
-            Console.WriteLine("\nMatrix output for sum");
-            sum.ShowInConsole();
-            Console.WriteLine("\nMatrix output for substraction");
-            substraction.ShowInConsole();
-            Console.WriteLine("\nMatrix output for multiplication");
-            multiplication.ShowInConsole();
-            Console.WriteLine("\n1st Matrix transposed:");
-            firstMatrix.ShowInConsole();
-            Console.WriteLine("\n2nd Matrix transposed:");
-            secondMatrix.ShowInConsole();
-            Console.WriteLine("\nDet of 1st Matrix: " + firstMatrix.Det());
-            Console.WriteLine("\nDet of 2nd Matrix: " + secondMatrix.Det());
+                // Display the second matrix
+                Console.WriteLine("Second Matrix:");
+                matrixMul.ShowInConsole();
 
-            Console.ReadLine();
+                // Perform multiplication
+                Matrix multiplicationResult = Matrix.Multiplication(matrix1, matrixMul);
+
+                // Display result
+                Console.WriteLine("Result of Multiplication:");
+                multiplicationResult.ShowInConsole();
+                break;
+
+            case 4:
+                // Perform transpose
+                Matrix transposeResult = matrix1.Transpose();
+
+                // Display result
+                Console.WriteLine("Result of Transpose:");
+                transposeResult.ShowInConsole();
+                break;
+
+            case 5:
+                // Perform determinant
+                int determinant = matrix1.Det();
+
+                // Display result
+                Console.WriteLine($"Determinant: {determinant}");
+                break;
+
+            default:
+                Console.WriteLine("Invalid choice. Exiting program.");
+                break;
         }
-        static int Validation(string matrixDimension)
-        {
-            int dimension;
-            bool isValid = false;
-            do
-            {
-                // Console.WriteLine($"Please enter the number of {matrixDimension}");
-                dimension = Convert.ToInt32(Console.ReadLine());
-                if (dimension > 0)
-                {
-                    isValid = true;
-                }
-                else
-                {
-                    Console.WriteLine($"{matrixDimension} cannot be less than 1! Enter correct value:");
-                    Console.WriteLine($"{matrixDimension}:");
-                    isValid = false;
-                }
-            }
-            while (!isValid);
 
-
-            return dimension;
-        }
-
+        // Wait for a key press before closing the console window
+        Console.ReadKey();
     }
 
+    static int Validation(string matrixDimension)
+    {
+        int dimension;
+        bool isValid = false;
+
+        do
+        {
+            Console.WriteLine($"Please enter the number of {matrixDimension}");
+            dimension = Convert.ToInt32(Console.ReadLine());
+
+            if (dimension > 0)
+            {
+                isValid = true;
+            }
+            else
+            {
+                Console.WriteLine($"{matrixDimension} cannot be less than 1! Enter correct value:");
+                isValid = false;
+            }
+        }
+        while (!isValid);
+
+        return dimension;
+    }
 }
+
